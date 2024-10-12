@@ -1,7 +1,9 @@
 import express, { urlencoded } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-
+import dotenv from "dotenv";
+import connectDB from "./utils/db.js";
+dotenv.config();
 const app=express();
 
 app.get("/",(req,res)=>{
@@ -22,8 +24,9 @@ const corsOptions={
 app.use(cors(corsOptions));
 
 
-const PORT= 8000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT,()=>{
+    connectDB();
     console.log(`Server is listen at port ${PORT}`);
 });
